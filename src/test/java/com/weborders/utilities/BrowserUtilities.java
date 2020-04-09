@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class BrowserUtilities {
     /**
@@ -109,5 +110,15 @@ public class BrowserUtilities {
             e.printStackTrace();
         }
         return path;
+    }
+
+    /**
+     * This method will switch webdriver from current window
+     * to target window based on page title
+     * @param title of the window to switch
+     */
+    public static void switchWindow(String title){
+        Set<String> windowHandles = Driver.getDriver().getWindowHandles();
+        windowHandles.forEach(each-> {Driver.getDriver().switchTo().window(each); if (Driver.getDriver().getTitle().equals(title)); });
     }
 }
